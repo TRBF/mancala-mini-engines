@@ -247,8 +247,8 @@ struct positionVar engineMove(struct boardVar board, int evalLimit, bool addNois
 		}
 	}
 
-	// for(int i = 0; i<6; i++) printf("move%d: %.4f\n", i, moves[i]);
-	// printf("enginemove: %d %d\n", move.column, move.row);
+	for(int i = 0; i<6; i++) printf("move%d: %.4f\n", i, moves[i]);
+	printf("enginemove: %d %d\n", move.column, move.row);
 	return move;
 }
 
@@ -326,11 +326,10 @@ bool playEvE(struct boardVar board, int evalLimit, bool addNoise){
     bool player = true;
     while(!board.game_ended){
         board = movePieces(board, engineMove(board, evalLimit, addNoise));
-        // printBoard(board);
-        // printf("\n\n\n");
-        board = movePieces(board, engineMove(board, evalLimit, addNoise));
+        printBoard(board);
+        printf("\n\n");
         board = checkEnd(board);
-        // printBoard(board);
+        printBoard(board);
     }
 	return board.s[0]>board.s[1]; 
 }
@@ -354,14 +353,18 @@ int main(){
 
 	resetBoard(&newBoardVar);
 
-	// playPvE(newBoardVar, 0, 19);
+	playPvE(newBoardVar, 0, 19);
+    // playEvE(newBoardVar, 18, true);
+    
+    /*
     int count, simulationCount = 10, tcount = 0;
-    for(int i = 1; i<=21; i++){
+    for(int i = 1; i<=22; i++){
         count = simulate(newBoardVar, i, simulationCount, true);
-        printf("%d to %d\n", count, simulationCount-count);
+        printf("Depth: %d   %d to %d\n", i, count, simulationCount-count);
         tcount += count;
     }
     printf("%d to %d", tcount, 210-tcount);
+    **/
 	return 0;
 }
 
