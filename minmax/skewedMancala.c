@@ -25,7 +25,7 @@ struct positionVar{
 
 int ctr = 0;
 void printBoard(struct boardVar board){
-  // system("clear");
+  system("clear");
   printf("Turn: %b\n", board.player);
   printf("  ");
   
@@ -186,7 +186,7 @@ struct positionVar engineMove(struct boardVar board, int evalLimit, double proba
     moves[i] = evaluate(temp, 0, evalLimit, probabilities);
   }
   if(board.player){
-    move.column = 48;
+    move.column = 0;
     for(int i = 0; i<6; i++){
       if(moves[i]<=moves[move.column]){
         move.column = i;
@@ -206,7 +206,7 @@ struct positionVar engineMove(struct boardVar board, int evalLimit, double proba
     }
   }
   else{
-    move.column = -48;
+    move.column = 0;
     for(int i = 0; i<6; i++){
       if(moves[i]>=moves[move.column]){
         move.column = i;
